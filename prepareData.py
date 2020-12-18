@@ -53,6 +53,7 @@ def data_for_graph():
         unique_score = diem_2018[course].value_counts()
         unique_score.sort_index(inplace = True)
         data_2018.append(unique_score)
+        print(data_2018)
 
     for course in courses:
         unique_score = diem_2019[course].value_counts()
@@ -66,4 +67,25 @@ def data_for_graph():
         
     return data_2018,data_2019,data_2020
 
-data_for_graph()
+def course_combination():
+    course_comb={'A':["toan","li","hoa"],'B':["toan","hoa","sinh"],'C':["van","su","dia"],'D':["toan","van","anh"]}
+
+    diem_thi_2018,diem_thi_2019,diem_thi_2020 = remove_unnecessary_column()
+
+    diem_thi_2018_A = diem_thi_2018[course_comb['A']]
+    diem_thi_2018_B = diem_thi_2018[course_comb['B']]
+    diem_thi_2018_C = diem_thi_2018[course_comb['C']]
+    diem_thi_2018_D = diem_thi_2018[course_comb['D']]
+
+    diem_thi_2019_A = diem_thi_2019[course_comb['A']]
+    diem_thi_2019_B = diem_thi_2019[course_comb['B']]
+    diem_thi_2019_C = diem_thi_2019[course_comb['C']]
+    diem_thi_2019_D = diem_thi_2019[course_comb['D']]
+
+    diem_thi_2020_A = diem_thi_2020[course_comb['A']]
+    diem_thi_2020_B = diem_thi_2020[course_comb['B']]
+    diem_thi_2020_C = diem_thi_2020[course_comb['C']]
+    diem_thi_2020_D = diem_thi_2020[course_comb['D']]
+
+
+    
