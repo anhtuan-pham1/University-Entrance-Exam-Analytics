@@ -70,14 +70,44 @@ def data_for_graph():
 def course_combination():
     course_comb={'A':["toan","li","hoa"],'B':["toan","hoa","sinh"],'C':["van","su","dia"],'D':["toan","van","anh"]}
     diem_thi_2018,diem_thi_2019,diem_thi_2020 = remove_unnecessary_column()
+
     diem_thi_to_hop_2018 = []
     diem_thi_to_hop_2019 = []
     diem_thi_to_hop_2020 = []
     for key in course_comb:
-        diem_thi_to_hop_2018.append(diem_thi_2018[course_comb[key]])
-        diem_thi_to_hop_2019.append(diem_thi_2019[course_comb[key]])
-        diem_thi_to_hop_2020.append(diem_thi_2020[course_comb[key]])
+        diem_thi_2018_new = (diem_thi_2018[course_comb[key]].dropna())
+        diem_thi_2018_new = pd.concat([diem_thi_2018_new,pd.DataFrame(diem_thi_2018_new.sum(axis=1),columns=['total'])],axis=1)
+        diem_thi_to_hop_2018.append(diem_thi_2018_new)
+
+        diem_thi_2019_new = (diem_thi_2019[course_comb[key]].dropna())
+        diem_thi_2019_new = pd.concat([diem_thi_2019_new,pd.DataFrame(diem_thi_2019_new.sum(axis=1),columns=['total'])],axis=1)
+        diem_thi_to_hop_2019.append(diem_thi_2019_new)
+
+        diem_thi_2020_new = (diem_thi_2020[course_comb[key]].dropna())
+        diem_thi_2020_new = pd.concat([diem_thi_2020_new,pd.DataFrame(diem_thi_2020_new.sum(axis=1),columns=['total'])],axis=1)
+        diem_thi_to_hop_2020.append(diem_thi_2020_new)
     return diem_thi_to_hop_2018,diem_thi_to_hop_2019,diem_thi_to_hop_2020
 
+def search_thu_khoa():
+    diem_thi_to_hop_2018,diem_thi_to_hop_2019,diem_thi_to_hop_2020 = course_combination()
+    best_2018 = []
+    best_2019 = []
+    best_2020 = []
+    #thủ khoa theo tổ hợp A->B->C->D
+    for comb in diem_thi_to_hop_2018:
+        _ = comb.loc[comb['total'].idxmax()]
+        print(comb['total'].sort_values().max())
+        #test search highest score
+        #best_2018.append(_.to_string().split('\n', ''))
+
+    for comb in diem_thi_to_hop_2019:
+        _ = comb.loc[comb['total'].idxmax()]
+        #test search highest score
+        #best_2019.append(_.to_string().split('\n'))
+    for comb in diem_thi_to_hop_2020:
+        _ = comb.loc[comb['total'].idxmax()]
+        #test search highest score
+        #best_2020.append(_.to_string().split('\n'))
+    return best_2018,best_2019,best_2020
 
 
