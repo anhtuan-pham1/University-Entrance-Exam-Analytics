@@ -47,4 +47,3 @@ class Data:
             _ = comb.loc[comb['total'].idxmax()]
             valedictorian_list.append(_)
             print(comb['total'].sort_values().max())
-        print(valedictorian_list)
