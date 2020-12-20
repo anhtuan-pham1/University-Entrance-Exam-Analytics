@@ -3,6 +3,7 @@ import pandas as pd
 class Data:
     def __init__(self,option):
         self.courses = ["dia","cd","hoa","khtn","su","anh","van","toan","sinh","li"]
+        # check option to open the correct file
         try:
             if option == 1:
                 dataframe = pd.read_csv("diemthi/2018.csv")
@@ -16,14 +17,14 @@ class Data:
         except FileExistsError:
             print("An exception occurred")
 
-    def average_score(self,option):
+    def average_score(self):
         average_score_dict = dict.fromkeys(courses, None)
         for course in self.courses:
             average = self.df[course].mean(skipna= True).round(decimals=2)
             average_score_dict[course] = average
         return average_score_dict
 
-    def get_graph_data(self, option):
+    def get_graph_data(self):
         data = []
         for course in self.courses:
             unique_score = self.df [course].value_counts()
@@ -31,19 +32,31 @@ class Data:
             data.append(unique_score)
         return data
     
-    def course_combination(self,option):
+    def course_combination(self):
+        #code -> combination of the courses
         course_comb={'A':["toan","li","hoa"],'B':["toan","hoa","sinh"],'C':["van","su","dia"],'D':["toan","van","anh"]}
         comb_score = []
         for key in course_comb:
             temp_df = (self.df[course_comb[key]].dropna())
             temp_df = pd.concat([temp_df,pd.DataFrame(temp_df.sum(axis=1),columns=['total'])],axis=1)
             comb_score.append(temp_df)
+        print(comb_score)
         return comb_score
 
-    def search_valedictorian(self,option):
+    def search_valedictorian(self):
         valedictorian_list = []
-        comb_score = self.course_combination(option)
+        comb_score = self.course_combination()
         for comb in comb_score :
             _ = comb.loc[comb['total'].idxmax()]
             valedictorian_list.append(_)
             print(comb['total'].sort_values().max())
+
+    def search_grades(self,ID: int):
+        grades = self.df[self.df.code.eq(ID)]
+        if grades.empty:
+            print("Wrong IDs")
+        else:
+            print(grades)
+
+    
+    

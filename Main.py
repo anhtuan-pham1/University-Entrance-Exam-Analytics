@@ -7,7 +7,7 @@ Choose one of these option:
 1. University Entrance Exam result 2018
 2. University Entrance Exam result 2018
 3. University Entrance Exam result 2018
-input:  ''')
+option:  ''')
     if(option not in ['0','1', '2', '3']):
         print('wrong input, please try again')
         option = '-1'
@@ -20,14 +20,11 @@ Choose one of these option:
 1. Return to choose year option
 2. Search for your grade
 3. Search for valedictorian of each combination
-input:  ''')
+option:  ''')
     if(option not in ['0','1', '2', '3']):
         print('wrong input, please try again')
         option = '-1'
     return int(option)
-
-
-
 
 if __name__ == '__main__':
     while True:
@@ -36,7 +33,18 @@ if __name__ == '__main__':
             if option == 0:
                 print("Thank you for using our app!! Hope to see you again!!")
                 exit(0)
-            b = Data(option)
+            data = Data(option)
+            while True:
+                user = user_option()
+                if user == 0:
+                    exit(1)
+                elif user == 1:
+                    break
+                elif user == 2:
+                    ID = input("Enter your ID: ")
+                    data.search_grades(ID)
+                elif user == 3:
+                    data.search_valedictorian()
         except Exception:
             print("Invalid input!!! Please try to enter another option in the list!")
                 
