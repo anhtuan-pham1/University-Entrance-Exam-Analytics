@@ -66,7 +66,10 @@ class Data:
             counter += 1
 
     def search_grades(self,ID):
-        ID_int = int (ID)
-        df = self.df.set_index('code')
-        if self.df['code'].isin([ID]).any():
-             print(df.loc[[ID_int]].dropna(axis=1, how='all'))
+        try:
+            ID_int = int (ID)
+            df = self.df.set_index('code')
+            if self.df['code'].isin([ID]).any():
+                print(df.loc[[ID_int]].dropna(axis=1, how='all'))
+        except ValueError:
+            print("Wrong IDs. Please try again!")
