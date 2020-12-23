@@ -30,24 +30,24 @@ option:  ''')
 if __name__ == '__main__':
     while True:
         option = year_option()
-        # try:
-        if option == 0:
-            print("Thank you for using our app!! Hope to see you again!!")
-            exit(0)
-        data = Data(option)
-        while True:
-            user = user_option()
-            if user == 0:
+        try:
+            if option == 0:
+                print("Thank you for using our app!! Hope to see you again!!")
                 exit(0)
-            elif user == 1:
-                break
-            elif user == 2:
-                ID = input("Enter your ID: ")
-                data.search_grades(ID)
-            elif user == 3:
-                data.search_valedictorian()
-            elif user == 4:
-                graph = Graph(option).graph_ratio()
+            data = Data(option)
+            while True:
+                user = user_option()
+                if user == 0:
+                    exit(0)
+                elif user == 1:
+                    break
+                elif user == 2:
+                    ID = input("Enter your ID: ")
+                    data.search_grades(ID)
+                elif user == 3:
+                    data.search_valedictorian()
+                elif user == 4:
+                    graph = Graph(option).graph_ratio()
     
-        # 3except Exception:
-        #     print("Invalid input!!! Please try to enter another option in the list!")
+        except Exception:
+            print("Invalid input!!! Please try to enter another option in the list!")
