@@ -40,23 +40,33 @@ class Data:
             temp_df = (self.df[course_comb[key]].dropna())
             temp_df = pd.concat([temp_df,pd.DataFrame(temp_df.sum(axis=1),columns=['total'])],axis=1)
             comb_score.append(temp_df)
-        print(comb_score)
         return comb_score
 
     def search_valedictorian(self):
         valedictorian_list = []
+        counter = 0
         comb_score = self.course_combination()
         for comb in comb_score :
             _ = comb.loc[comb['total'].idxmax()]
             valedictorian_list.append(_)
-            print(comb['total'].sort_values().max())
+            #print(comb['total'].sort_values().max())
+        for i in range (0,len(valedictorian_list)):
+            if counter == 0:
+                print("Valedictorian of A Combination: ")
+                print(valedictorian_list[i].to_string())
+            elif counter == 1:
+                print("Valedictorian of B Combination: ")
+                print(valedictorian_list[i].to_string())
+            elif counter == 2:
+                print("Valedictorian of C Combination: ")
+                print(valedictorian_list[i].to_string())
+            elif counter == 3:
+                print("Valedictorian of D Combination: ")
+                print(valedictorian_list[i].to_string())
+            counter += 1
 
-    def search_grades(self,ID: int):
-        grades = self.df[self.df.code.eq(ID)]
-        if grades.empty:
-            print("Wrong IDs")
-        else:
-            print(grades)
-
-    
-    
+    def search_grades(self,ID):
+        ID_int = int (ID)
+        df = self.df.set_index('code')
+        if self.df['code'].isin([ID]).any():
+             print(df.loc[[ID_int]].dropna(axis=1, how='all'))
