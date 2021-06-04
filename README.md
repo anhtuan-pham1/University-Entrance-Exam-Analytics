@@ -10,3 +10,4 @@ type in the candidates' code (I don't use actual names in term of privacy). The 
 Navigate to Vietnamese University Entrance Exam visualization for the year of 2018 - 2020 folder then run ``` python Main.py ```
 After the program was run, there will be options appear on the terminal. You can follow the instruction appeared and search your grades or analyze the grades trends.
 
+![GitHub Logo](/Image/Biology_Graph.png)
