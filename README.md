@@ -14,4 +14,6 @@ After the program was run, there will be options appear on the terminal. You can
 ![Biology](/Image/Biology_Graph.png)
 ![Math](/Image/Math_Graph.png)
 ![Physic](/Image/Physic_Graph.png)
+
+
 ![Search](/Image/Search_grades.png)
